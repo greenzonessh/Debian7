@@ -40,7 +40,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/sources.list.debian7"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
@@ -77,7 +77,7 @@ service vnstat restart
 
 # install screenfetch
 cd
-wget 'https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/screenfetch-dev'
+wget 'https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/screenfetch-dev'
 mv screenfetch-dev /usr/bin/screenfetch-dev
 chmod +x /usr/bin/screenfetch-dev
 echo "clear" >> .profile
@@ -87,11 +87,11 @@ echo "screenfetch-dev" >> .profile
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/nginx.conf"
 mkdir -p /home/vps/public_html
 echo "<pre>www.fornesia.com</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/vps.conf"
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
@@ -100,11 +100,11 @@ service nginx restart
 #wget -O /etc/openvpn/openvpn.tar "https://github.com/ForNesiaFreak/FNS/raw/master/sett/openvpn-debian.tar"
 #cd /etc/openvpn/
 #tar xf openvpn.tar
-#wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/1194.conf"
+#wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/1194.conf"
 #service openvpn restart
 #sysctl -w net.ipv4.ip_forward=1
 #sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-#wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/iptables.up.rules"
+#wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/iptables.up.rules"
 #sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 #sed -i $MYIP2 /etc/iptables.up.rules;
 #iptables-restore < /etc/iptables.up.rules
@@ -112,7 +112,7 @@ service nginx restart
 
 # configure openvpn client config
 #cd /etc/openvpn/
-#wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/1194-client.conf"
+#wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/1194-client.conf"
 #sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 #PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 #useradd -M -s /bin/false fornesia
@@ -136,8 +136,8 @@ service nginx restart
 
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -145,7 +145,7 @@ service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/mrtg.conf" >> /etc/mrtg.cfg
+curl "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/mrtg.conf" >> /etc/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -201,7 +201,7 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
@@ -215,21 +215,21 @@ service webmin restart
 service vnstat restart
 
 # install pptp vpn
-wget https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/pptpinstall.sh
+wget https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/pptpinstall.sh
 chmod +x pptpinstall.sh
 ./pptpinstall.sh
 
 # download script
 cd
-wget -O speedtest_cli.py "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/speedtest_cli.py"
-wget -O bench-network.sh "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/bench-network.sh"
-wget -O ps_mem.py "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/ps_mem.py"
-wget -O dropmon "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/dropmon.sh"
-wget -O user-login.sh "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/freak/user-login.sh"
-wget -O user-expired.sh "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/freak/user-expired.sh"
+wget -O speedtest_cli.py "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/speedtest_cli.py"
+wget -O bench-network.sh "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/bench-network.sh"
+wget -O ps_mem.py "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/ps_mem.py"
+wget -O dropmon "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/dropmon.sh"
+wget -O user-login.sh "https://raw.githubusercontent.com/greenzonessh/Debian7/master/freak/user-login.sh"
+wget -O user-expired.sh "https://raw.githubusercontent.com/greenzonessh/Debian7/master/freak/user-expired.sh"
 wget -O userlimit.sh "https://raw.githubusercontent.com/suryadewa/fornesiavps/fns/limit.sh"
-wget -O user-list.sh "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/freak/user-list.sh"
-wget -O /etc/issue.net "https://raw.githubusercontent.com/ForNesiaFreak/FNS_Debian7/fornesia.com/null/banner"
+wget -O user-list.sh "https://raw.githubusercontent.com/greenzonessh/Debian7/master/freak/user-list.sh"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/greenzonessh/Debian7/master/null/banner"
 echo "0 0 * * * root /root/user-expired.sh" > /etc/cron.d/user-expired
 echo "@reboot root /root/userlimit.sh" > /etc/cron.d/userlimit
 echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
@@ -307,4 +307,4 @@ echo "VPS AUTO REBOOT TIAP 12 JAM, SILAHKAN REBOOT VPS ANDA !"  | tee -a log-ins
 echo ""  | tee -a log-install.txt
 echo "==========================================="  | tee -a log-install.txt
 cd
-rm -f /root/debian7.sh
+rm -f /root/debian7_no.sh
